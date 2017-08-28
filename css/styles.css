@@ -1,0 +1,96 @@
+body{
+  margin:0;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: black;
+}
+#scene {
+  background: white;
+  width: 50vw;
+  height: 90vh;
+  margin: auto;
+  position: relative;
+}
+#player {
+ background-color: red;
+ position: absolute;
+ width: 15px;
+ height: 25px;
+}
+.platform {
+  position: absolute;
+  height: 2px;
+  background-color: #600;
+}
+
+#ground {
+  top: 90vh;
+  left: 0vw;
+  width: 100%;
+}
+#plat1 {
+  top: 80vh;
+  left: calc(100% - 150px);
+  width: 150px;
+}
+#plat2 {
+  top: 80vh;
+  left: 0px;
+  width: 150px;
+}
+#plat3 {
+  top: 70vh;
+  left: 200px;
+  width: 100px;
+}
+#plat4 {
+  top: 60vh;
+  left: 75px;
+  width: 100px;
+}
+#plat5 {
+  top: 50vh;
+  left: 200px;
+  width: 200px;
+}
+#plat6 {
+  top: 40vh;
+  left: 0px;
+  width: 100px;
+}
+#plat7 {
+  top: 35vh;
+  left: calc(100% - 200px);
+  width: 200px;
+}
+#plat8 {
+  top: 25vh;
+  left: calc(100% - 50px);
+  width: 50px;
+}
+#final-plat {
+  top: 15vh;
+  left: 0;
+  width: calc(100% - 100px);
+}
+#badGuy {
+  position: absolute;
+  /*top: calc(90vh - 50px);
+  left: 30vw;*/
+  top: calc(15vh - 50px);
+  left: 50px;
+  width: 35px;
+  height: 50px;
+  background-color: yellow;
+}
+.bullet {
+  position: absolute;
+  width: 5px;
+  top: calc(15vh - 50px);
+  left: 50px;
+  height: 10px;
+  border-radius: 10px;
+  background: blue;
+}
