@@ -9,22 +9,14 @@ function BadGuy( identifier ){
 BadGuy.prototype = Object.create(Actor.prototype);
 
 
-BadGuy.prototype.init = function(){
-  this._identifyID( $('#badGuy') );
-  this.y = parseInt(this.identity.css('top'));
-  this.x = parseInt(this.identity.css('left'));
-  this.width = parseInt(this.identity.width());
-  this.height = parseInt(this.identity.height());
-};
-
-BadGuy.prototype._identifyID = function(indetifier){
-  this.identity = indetifier;
-};
-
 BadGuy.prototype.killPlayer = function(){
-  if( (player.x+player.width >= this.x) && (player.x <= this.x+this.width) && (player.y >= this.y) && (player.y <= this.y+this.height) ){
+  if(this._collisionLat()){
     player.died = true;
   }
+};
+
+BadGuy.prototype._collisionLat = function(){
+  return (player.x+player.width >= this.x) && (player.x <= this.x+this.width) && (player.y >= this.y) && (player.y <= this.y+this.height);
 };
 
 BadGuy.prototype.move = function(){
@@ -37,34 +29,29 @@ BadGuy.prototype.move = function(){
   }
 };
 
+BadGuy.prototype.randomNumber = function(max){
+  return Math.round(Math.random()*max);
+};
 
 BadGuy.prototype.shoot = function(){
-    var rand = Math.round(Math.random()*10);
 
-    if (rand <= 1){
+    if (this.randomNumber(10) <= 1){
       $('#scene').append('<div class="bullet"></div>');
+      $('.bullet').css('left', this.x+17);
     }
 
     that = this;
     $('.bullet').each(function(e) {
       $posBulletY = parseInt($(this).css('top'));
-      $posBulletX = parseInt($(this).css('left'));
       $posBulletY += that.speedShot;
-      $(this).css('top', $posBulletY);
+      that._update($(this), 'top', $posBulletY);
 
-      if( $posBulletY >= 600){
+      if( $posBulletY >= scene.height ){
         $(this).remove();
       }
-      if (that._collisionPlatforms($(this), $('#player')) ) {
+      if (that._collisionEnvironment($(this), $('#player')) ) {
         player.died = true;
       }
     });
 
-};
-
-
-BadGuy.prototype._collisionPlatforms = function(a, b){
-  var posA = $(a).position(); var wA = $(a).width(); var hA = $(a).height();
-  var posB = $(b).position(); var wB = $(b).width(); var hB = $(b).height();
-  return !(posA.left > posB.left + wB || posB.left > posA.left + wA || posA.top > posB.top + hB || posB.top > posA.top + hA);
 };

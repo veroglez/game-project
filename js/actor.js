@@ -8,10 +8,12 @@ function Actor(x,y){
   this.died = false;
 }
 
-Actor.prototype.init = function(){
-  this.identity.css('top', parseInt($("#ground").css('top'))-25 ).css('left', 20);
+Actor.prototype.init = function(container, top, left){
+  this.identity.css('top', parseInt(container.css('top'))-top ).css('left', left);
   this.height = parseInt(this.identity.css('height'));
   this.width = parseInt(this.identity.css('width'));
+  this.y = parseInt(this.identity.css('top'));
+  this.x = parseInt(this.identity.css('left'));
 };
 
 Actor.prototype._identifyID = function(indetifier){
@@ -24,15 +26,21 @@ Actor.prototype._stateCollection = function(property){
 Actor.prototype.moveLeft = function(){
   this.x = this._stateCollection('left');
   this.x -= this.speedX;
-  this._update('left', this.x);
+  this._update(this.identity, 'left', this.x);
 };
 
 Actor.prototype.moveRight = function(){
   this.x = this._stateCollection('left');
   this.x += this.speedX;
-  this._update('left', this.x);
+  this._update(this.identity, 'left', this.x);
 };
 
-Actor.prototype._update = function(property, variable){
-  this.identity.css(property, variable +'px');
+Actor.prototype._update = function(identifier, property, variable){
+  identifier.css(property, variable +'px');
+};
+
+Actor.prototype._collisionEnvironment = function(a, b){
+  var posA = $(a).position(); var wA = $(a).width(); var hA = $(a).height();
+  var posB = $(b).position(); var wB = $(b).width(); var hB = $(b).height();
+  return !(posA.left > posB.left + wB || posB.left > posA.left + wA || posA.top > posB.top + hB || posB.top > posA.top + hA);
 };

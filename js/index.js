@@ -13,7 +13,7 @@ function movePaddle(){
 
 //********************************************************************//
 $( document ).ready(function() {
-  scene = new Scene();
+  scene = new Scene( $('#scene') );
   player = new Player( $('#player') );
   badGuy = new BadGuy( $('#badGuy') );
 
@@ -23,9 +23,6 @@ $( document ).ready(function() {
     }).keyup(function(e){
     delete keys[e.keyCode];
   });
-
-  //player._identifyID( $('#player') );
-
 
   // Start the game
   scene.startGame();
@@ -43,8 +40,6 @@ $( document ).ready(function() {
       scene.resetGame();
     }
 
-
-    //console.log('¿Estas muerto?', player.died);
     player.move();
     badGuy.move();
     if(keys[38]){       // Jump
@@ -54,8 +49,6 @@ $( document ).ready(function() {
     }else if(keys[37]){ // Move left
       player.moveLeft();
     }
-
-    //badGuy.move();
 
   }, 30);
 
