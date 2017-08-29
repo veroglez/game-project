@@ -28,7 +28,7 @@ Player.prototype.move = function(){
     that = this;
     $('.platform').each(function(e) {
       $topPlatform = parseInt($(this).css('top'));
-      if (that._collisionEnvironment($(this), that.identity) && that.y <= $topPlatform) {
+      if (that._collisionEnvironment($(this), that.identity) && that.y <= $topPlatform ) {
         that._update(that.identity, 'top', $topPlatform - that.height);
         that.onPlatform = true; that.speedY = 0;
       }
@@ -42,12 +42,21 @@ Player.prototype.move = function(){
 };
 
 Player.prototype.kill = function(){
-  if( this._collisionTop() ){
+  if( this._collisionTop( $('#player'), $('#badGuy')) ){
     badGuy.died = true;
     this._update(this.identity,'top', this.y);
   }
 };
 
-Player.prototype._collisionTop = function(){
-  return (this.y + this.height >= badGuy.y) && (this.y <= badGuy.y+badGuy.height) && (this.x + this.width >= badGuy.x) && (this.x <= badGuy.x + badGuy.width);
+Player.prototype._collisionTop = function(a,b){
+  var posA = $(a).position(); var wA = $(a).width(); var hA = $(a).height();
+  var posB = $(b).position(); var wB = $(b).width(); var hB = $(b).height();
+  return (posA.top + hA >= posB.top) && (posA.top <= posB.top+hB) && (posA.left + wA >= posB.left) && (posA.left <= posB.left + wB);
+};
+
+
+Actor.prototype._collisionEnvironment = function(a, b){
+  var posA = $(a).position(); var wA = $(a).width(); var hA = $(a).height();
+  var posB = $(b).position(); var wB = $(b).width(); var hB = $(b).height();
+  return !(posA.left > posB.left + wB || posB.left > posA.left + wA || posA.top > posB.top + hB || posB.top > posA.top + hA);
 };

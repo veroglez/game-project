@@ -10,13 +10,15 @@ BadGuy.prototype = Object.create(Actor.prototype);
 
 
 BadGuy.prototype.killPlayer = function(){
-  if(this._collisionLat()){
+  if(this._collisionLat( $('#badGuy'), $('#player') )){
     player.died = true;
   }
 };
 
-BadGuy.prototype._collisionLat = function(){
-  return (player.x+player.width >= this.x) && (player.x <= this.x+this.width) && (player.y >= this.y) && (player.y <= this.y+this.height);
+BadGuy.prototype._collisionLat = function(a,b){ //b = player a = budguy
+  var posA = $(a).position(); var wA = $(a).width(); var hA = $(a).height();
+  var posB = $(b).position(); var wB = $(b).width(); var hB = $(b).height();
+  return (posA.top + hA >= posB.top) && (posA.top <= posB.top) && (posA.left + wA >= posB.left) && (posA.left <= posB.left + wB);
 };
 
 BadGuy.prototype.move = function(){
