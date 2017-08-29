@@ -4,6 +4,11 @@ var badGuy;
 var miniBadGuy;
 var keys = {};
 var count = 0;
+var platforms = ['plat1','plat2','plat3','plat4','plat5','plat6','plat7','plat8'];
+
+function mixPlatforms( platforms ){
+  return _.shuffle(platforms);
+}
 
 $( document ).ready(function() {
   scene = new Scene( $('#scene') );
@@ -11,6 +16,7 @@ $( document ).ready(function() {
   badGuy = new BadGuy( $('#badGuy') );
   miniBadGuy1 = new MiniBadGuy( $('#miniBadGuy1') );
   miniBadGuy2 = new MiniBadGuy( $('#miniBadGuy2') );
+  platforms = mixPlatforms(platforms);
 
   $(document).on('keydown', function(e){
     keys[e.keyCode] = true;
@@ -18,7 +24,7 @@ $( document ).ready(function() {
     delete keys[e.keyCode];
   });
 
-  scene.startGame();
+  scene.startGame(platforms);
 
   var game = setInterval(function(){
 
@@ -34,22 +40,18 @@ $( document ).ready(function() {
         scene.resetGame();
         clearInterval(game);
       }
-      // if(miniBadGuy1.died)
-      //   miniBadGuy1.die();
-      // if(miniBadGuy2.died)
-      //   miniBadGuy2.die();
+      if(miniBadGuy1.died)
+        miniBadGuy1.die();
+      if(miniBadGuy2.died)
+        miniBadGuy2.die();
     }
 
     player.move();
     badGuy.actions();
     if(!miniBadGuy1.died)
-      miniBadGuy1.actions( $('#plat3') );
+      miniBadGuy1.actions( $('#'+platforms[1]) );
     if(!miniBadGuy2.died)
-      miniBadGuy2.actions( $('#plat1') );
-    console.log('1: ', miniBadGuy1.died);
-    console.log('2: ', miniBadGuy2.died);
-    console.log('player: ', player.died);
-
+      miniBadGuy2.actions( $("#"+platforms[2]) );
 
     if(keys[38])
       player.jump();

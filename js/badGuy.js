@@ -71,10 +71,8 @@ BadGuy.prototype.shoot = function(){
       $posBulletY = parseInt($(this).css('top'));
       $posBulletY += that.speedShot;
       that._update($(this), 'top', $posBulletY);
-
       if( $posBulletY >= scene.height )
         $(this).remove();
-
       if (that._collisionTop($(this), $('#player')) )
         player.died = true;
 

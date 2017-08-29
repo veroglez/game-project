@@ -3,11 +3,11 @@ function Scene( identifier ) {
   this.height = parseInt( identifier.height() );
 }
 
-Scene.prototype.startGame = function(){
+Scene.prototype.startGame = function( platforms ){
   player.init( $("#ground"), 25, 20 );
   badGuy.init( $("#final-plat"), 50, 50 );
-  miniBadGuy1.init( $("#plat3"), 35, $("#plat3").css('left') );
-  miniBadGuy2.init( $("#plat1"), 35, $("#plat1").css('left') );
+  miniBadGuy1.init( $("#"+platforms[1]), 35, $("#"+platforms[1]).css('left') );
+  miniBadGuy2.init( $("#"+platforms[2]), 35, $("#"+platforms[2]).css('left') );
 };
 
 Scene.prototype.resetGame = function(){

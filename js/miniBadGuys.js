@@ -46,5 +46,5 @@ MiniBadGuy.prototype._collisionLat = function(a,b){ //b = player a = budguy
 };
 
 MiniBadGuy.prototype.die = function(){
-  //this.identity.addClass('blocked').css('top', 800).css('left', 0);
+  this.identity.remove();
 };
