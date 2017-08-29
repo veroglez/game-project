@@ -6,6 +6,7 @@ function Player( identifier ){
   this.gravity = 1;
 }
 Player.prototype = Object.create(Actor.prototype);
+Player.prototype.constructor = Player;
 
 
 Player.prototype.jump = function(){
@@ -28,7 +29,7 @@ Player.prototype.move = function(){
     that = this;
     $('.platform').each(function(e) {
       $topPlatform = parseInt($(this).css('top'));
-      if (that._collisionEnvironment($(this), that.identity) && that.y <= $topPlatform ) {
+      if (that._collisionTop($(this), that.identity) && that.y <= $topPlatform ) {
         that._update(that.identity, 'top', $topPlatform - that.height);
         that.onPlatform = true; that.speedY = 0;
       }
@@ -36,25 +37,28 @@ Player.prototype.move = function(){
   }
 
   if(!badGuy.died)
-    this.kill();
-
+    this.kill( $('#player'), $('#badGuy'), badGuy );
+  if(!miniBadGuy1.died || !miniBadGuy2.died)
+    this.kill( $('#player'), $('#miniBadGuy1'), miniBadGuy1 );
+    this.kill( $('#player'), $('#miniBadGuy2'), miniBadGuy2 );
 };
 
-Player.prototype.kill = function(){
-  if( this._collisionTop( $('#player'), $('#badGuy')) ){
-    badGuy.died = true;
+Player.prototype.kill = function(attacker, attacked, name){
+  //if( this._collisionTop(attacker, attacked) ){
+  $topMiniBadGuy = parseInt(attacked.css('top'));
+  if(that._collisionTop(attacker, attacked) && that.y <= $topMiniBadGuy ){
+    name.died=true;
     this._update(this.identity,'top', this.y);
   }
 };
 
-Player.prototype._collisionTop = function(a,b){
-  var posA = $(a).position(); var wA = $(a).width(); var hA = $(a).height();
-  var posB = $(b).position(); var wB = $(b).width(); var hB = $(b).height();
-  return (posA.top + hA >= posB.top) && (posA.top <= posB.top+hB) && (posA.left + wA >= posB.left) && (posA.left <= posB.left + wB);
-};
+// Player.prototype._collisionTop = function(a,b){
+//     var posA = $(a).position(); var wA = $(a).width(); var hA = $(a).height();
+//     var posB = $(b).position(); var wB = $(b).width(); var hB = $(b).height();
+//     return (posA.top + hA >= posB.top) && (posA.top <= posB.top+hB) && (posA.left + wA >= posB.left) && (posA.left <= posB.left + wB);
+// };
 
-
-Actor.prototype._collisionEnvironment = function(a, b){
+Actor.prototype._collisionTop = function(a, b){
   var posA = $(a).position(); var wA = $(a).width(); var hA = $(a).height();
   var posB = $(b).position(); var wB = $(b).width(); var hB = $(b).height();
   return !(posA.left > posB.left + wB || posB.left > posA.left + wA || posA.top > posB.top + hB || posB.top > posA.top + hA);

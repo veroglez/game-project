@@ -25,18 +25,21 @@ Actor.prototype._stateCollection = function(property){
 
 Actor.prototype.moveLeft = function(){
   this.x = this._stateCollection('left');
-  this.x -= this.speedX;
+  if(this.x >= 0)
+    this.x -= this.speedX;
+
   this._update(this.identity, 'left', this.x);
 };
 
 Actor.prototype.moveRight = function(){
   this.x = this._stateCollection('left');
-  this.x += this.speedX;
+  if(this.x <= scene.width - this.width)
+    this.x += this.speedX;
   this._update(this.identity, 'left', this.x);
 };
 
-Actor.prototype._update = function(identifier, property, variable){
-  identifier.css(property, variable +'px');
+Actor.prototype._update = function(identifier, property, value){
+  identifier.css(property, value +'px');
 };
 
 Actor.prototype._collisionEnvironment = function(a, b){

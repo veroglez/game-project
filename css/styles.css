@@ -85,6 +85,14 @@ body{
   height: 50px;
   background-color: yellow;
 }
+.mini {
+  position: absolute;
+  top: calc(80vh - 20px);
+  left: 20px;
+  width: 20px;
+  height: 35px;
+  background-color: green;
+}
 .bullet {
   position: absolute;
   width: 5px;
