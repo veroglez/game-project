@@ -8,7 +8,6 @@ function BadGuy( identifier ){
 }
 BadGuy.prototype = Object.create(Actor.prototype);
 
-
 BadGuy.prototype.killPlayer = function(){
   if(this._collisionLat( $('#badGuy'), $('#player') )){
     player.died = true;
@@ -22,13 +21,12 @@ BadGuy.prototype._collisionLat = function(a,b){ //b = player a = budguy
 };
 
 BadGuy.prototype.move = function(){
-  if(!player.died){
+  if(!player.died)
     this.killPlayer();
-  }
 
-  if(this.gunShoot){
+  if(this.gunShoot)
     this.shoot();
-  }
+
 };
 
 BadGuy.prototype.randomNumber = function(max){
@@ -48,12 +46,11 @@ BadGuy.prototype.shoot = function(){
       $posBulletY += that.speedShot;
       that._update($(this), 'top', $posBulletY);
 
-      if( $posBulletY >= scene.height ){
+      if( $posBulletY >= scene.height )
         $(this).remove();
-      }
-      if (that._collisionEnvironment($(this), $('#player')) ) {
-        player.died = true;
-      }
-    });
 
+      if (that._collisionEnvironment($(this), $('#player')) )
+        player.died = true;
+
+    });
 };

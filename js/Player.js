@@ -35,9 +35,8 @@ Player.prototype.move = function(){
     });
   }
 
-  if(!badGuy.died){
+  if(!badGuy.died)
     this.kill();
-  }
 
 };
 

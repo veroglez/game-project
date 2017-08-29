@@ -3,28 +3,17 @@ var player;
 var badGuy;
 var keys = {};
 
-function movePaddle(){
-  if (keys[81]) {
-    paddle.moveUp();
-  }else if (keys[65]){
-    paddle.moveDown();
-  }
-}
-
-//********************************************************************//
 $( document ).ready(function() {
   scene = new Scene( $('#scene') );
   player = new Player( $('#player') );
   badGuy = new BadGuy( $('#badGuy') );
 
-  // Function to read the Code of the each key
   $(document).on('keydown', function(e){
     keys[e.keyCode] = true;
     }).keyup(function(e){
     delete keys[e.keyCode];
   });
 
-  // Start the game
   scene.startGame();
 
   var game = setInterval(function(){
@@ -42,13 +31,12 @@ $( document ).ready(function() {
 
     player.move();
     badGuy.move();
-    if(keys[38]){       // Jump
+    if(keys[38])
       player.jump();
-    }else if(keys[39]){ // Move right
+    else if(keys[39])
       player.moveRight();
-    }else if(keys[37]){ // Move left
+    else if(keys[37])
       player.moveLeft();
-    }
 
   }, 30);
 
