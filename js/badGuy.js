@@ -20,7 +20,7 @@ BadGuy.prototype.killPlayer = function(){
   }
 };
 
-BadGuy.prototype._collisionLat = function(a,b){ //b = player a = budguy
+BadGuy.prototype._collisionLat = function(a, b){
   var posA = $(a).position(); var wA = $(a).width(); var hA = $(a).height();
   var posB = $(b).position(); var wB = $(b).width(); var hB = $(b).height();
   return (posA.top + hA >= posB.top) && (posA.top <= posB.top) && (posA.left + wA >= posB.left) && (posA.left <= posB.left + wB);
@@ -44,12 +44,10 @@ BadGuy.prototype.moveLimits = function(){
 };
 
 BadGuy.prototype.actions = function(){
-
   if(!player.died)
     this.killPlayer();
-
   if(this.gunShoot)
-    this.shoot();
+    //this.shoot();
 
   this.move();
 };

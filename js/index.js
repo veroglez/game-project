@@ -4,7 +4,7 @@ var badGuy;
 var miniBadGuy;
 var keys = {};
 var count = 0;
-var platforms = ['plat1','plat2','plat3','plat4','plat5','plat6','plat7','plat8'];
+var platforms = ['plat1','plat2','plat3','plat4','plat5','plat6','plat7','plat8','plat9'];
 
 function mixPlatforms( platforms ){
   return _.shuffle(platforms);

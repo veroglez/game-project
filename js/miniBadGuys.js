@@ -34,6 +34,12 @@ MiniBadGuy.prototype.moveDirections = function(){
   this.x += (this.control) ? this.speedX : this.speedX*(-1);
 };
 
+MiniBadGuy.prototype.die = function(){
+  this.identity.remove();
+};
+
+
+
 MiniBadGuy.prototype.killPlayer = function(){
   if(this._collisionLat( this.identity, $('#player') )){
     player.died = true;
@@ -43,8 +49,4 @@ MiniBadGuy.prototype._collisionLat = function(a,b){ //b = player a = budguy
   var posA = $(a).position(); var wA = $(a).width(); var hA = $(a).height();
   var posB = $(b).position(); var wB = $(b).width(); var hB = $(b).height();
   return (posA.top + hA >= posB.top) && (posA.top <= posB.top) && (posA.left + wA >= posB.left) && (posA.left <= posB.left + wB);
-};
-
-MiniBadGuy.prototype.die = function(){
-  this.identity.remove();
 };

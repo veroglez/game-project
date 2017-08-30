@@ -6,7 +6,7 @@ function Scene( identifier ) {
 Scene.prototype.startGame = function( platforms ){
   player.init( $("#ground"), 25, 20 );
   badGuy.init( $("#final-plat"), 50, 50 );
-  miniBadGuy1.init( $("#"+platforms[1]), 75, $("#"+platforms[1]).css('left')-50 );
+  miniBadGuy1.init( $("#"+platforms[1]), 35, $("#"+platforms[1]).css('left') );
   miniBadGuy2.init( $("#"+platforms[2]), 35, $("#"+platforms[2]).css('left') );
 };
 

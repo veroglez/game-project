@@ -42,7 +42,7 @@ Actor.prototype._update = function(identifier, property, value){
   identifier.css(property, value +'px');
 };
 
-Actor.prototype._collisionEnvironment = function(a, b){
+Actor.prototype._collisionTop = function(a, b){
   var posA = $(a).position(); var wA = $(a).width(); var hA = $(a).height();
   var posB = $(b).position(); var wB = $(b).width(); var hB = $(b).height();
   return !(posA.left > posB.left + wB || posB.left > posA.left + wA || posA.top > posB.top + hB || posB.top > posA.top + hA);

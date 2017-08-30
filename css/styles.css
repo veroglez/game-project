@@ -25,6 +25,14 @@ body{
   background-color: #600;
 }
 
+.hide-platform {
+  position: absolute;
+  height: 2px;
+  background-color: transparent;
+}
+
+
+
 #ground {
   top: 90vh;
   left: 0vw;
@@ -69,6 +77,16 @@ body{
   top: 25vh;
   left: calc(100% - 50px);
   width: 50px;
+}
+#plat9 {
+  top: 35vh;
+  left: 200px;
+  width: 100px;
+}
+#plat10 {
+  top: 70vh;
+  left: 400px;
+  width: 100px;
 }
 #final-plat {
   top: 15vh;
