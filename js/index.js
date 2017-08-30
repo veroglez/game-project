@@ -4,19 +4,18 @@ var badGuy;
 var miniBadGuy;
 var keys = {};
 var count = 0;
-var platforms = ['plat1','plat2','plat3','plat4','plat5','plat6','plat7','plat8','plat9'];
+var platforms = [];
+var element;
 
-function mixPlatforms( platforms ){
-  return _.shuffle(platforms);
-}
 
 $( document ).ready(function() {
-  scene = new Scene( $('#scene') );
+
+  scene = new Scene( $('#scene'), 10, 6);
   player = new Player( $('#player') );
   badGuy = new BadGuy( $('#badGuy') );
-  miniBadGuy1 = new MiniBadGuy( $('#miniBadGuy1') );
-  miniBadGuy2 = new MiniBadGuy( $('#miniBadGuy2') );
-  platforms = mixPlatforms(platforms);
+  army = new Army(6);
+
+  // platforms = mixPlatforms(platforms);
 
   $(document).on('keydown', function(e){
     keys[e.keyCode] = true;
@@ -24,34 +23,29 @@ $( document ).ready(function() {
     delete keys[e.keyCode];
   });
 
-  scene.startGame(platforms);
+
+  scene.startGame();
+  platforms = scene.randomPlatforms;
 
   var game = setInterval(function(){
-
     if(player.died){
       alert('You die!');
       clearInterval(game);
       scene.resetGame();
     }
-    if(badGuy.died || miniBadGuy2.died || miniBadGuy1.died){
-      console.log('Malo muere!');
-      if(badGuy.died){
-        alert('you win!');
-        scene.resetGame();
-        clearInterval(game);
-      }
-      if(miniBadGuy1.died)
-        miniBadGuy1.die();
-      if(miniBadGuy2.died)
-        miniBadGuy2.die();
+
+    if(badGuy.died){
+      alert('you win!');
+      scene.resetGame();
+      clearInterval(game);
     }
 
     player.move();
     badGuy.actions();
-    if(!miniBadGuy1.died)
-      miniBadGuy1.actions( $('#'+platforms[1]) );
-    if(!miniBadGuy2.died)
-      miniBadGuy2.actions( $("#"+platforms[2]) );
+
+    for (var i = 0; i < 6; i++) {
+      army.team[i].actions($('#'+platforms[i]));
+    }
 
     if(keys[38])
       player.jump();

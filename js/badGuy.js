@@ -14,8 +14,12 @@ BadGuy.prototype = Object.create(Actor.prototype);
 BadGuy.prototype.constructor = BadGuy;
 
 
-BadGuy.prototype.killPlayer = function(){
-  if(this._collisionLat( this.identity, $('#player') )){
+BadGuy.prototype._randomNumber = function(min, max){
+  return Math.round(Math.random()*(max-min) + min);
+};
+
+BadGuy.prototype._killPlayer = function(){
+  if(this._collisionLat( this.identity, player.identity )){
     player.died = true;
   }
 };
@@ -26,40 +30,36 @@ BadGuy.prototype._collisionLat = function(a, b){
   return (posA.top + hA >= posB.top) && (posA.top <= posB.top) && (posA.left + wA >= posB.left) && (posA.left <= posB.left + wB);
 };
 
-BadGuy.prototype.move = function(){
+BadGuy.prototype._move = function(){
   this.x += (this.control) ? this.speedX : this.speedX*(-1);
-  this.moveLimits();
+  this._moveLimits();
   this._update(this.identity,'left', this.x);
 };
 
-BadGuy.prototype.moveLimits = function(){
+BadGuy.prototype._moveLimits = function(){
   $maxPlat = parseInt($('#final-plat').width()-this.width)/10;
   if(this.x >= this.rand1){
     this.control = false;
-    this.rand2 = $maxPlat*this.randomNumber(0, 5);
+    this.rand2 = $maxPlat*this._randomNumber(0, 5);
   }else if(this.x <= this.rand2){
     this.control = true;
-    this.rand1 = $maxPlat*this.randomNumber(5, 10);
+    this.rand1 = $maxPlat*this._randomNumber(5, 10);
   }
 };
 
 BadGuy.prototype.actions = function(){
   if(!player.died)
-    this.killPlayer();
+    this._killPlayer();
   if(this.gunShoot)
-    //this.shoot();
+    //this._shoot();
 
-  this.move();
+  this._move();
 };
 
 
-BadGuy.prototype.randomNumber = function(min, max){
-  return Math.round(Math.random()*(max-min) + min);
-};
+BadGuy.prototype._shoot = function(){
 
-BadGuy.prototype.shoot = function(){
-
-    if (this.randomNumber(0, 10) <= 1){
+    if (this._randomNumber(0, 10) <= 1){
       $('#scene').append('<div class="bullet"></div>');
       $('.bullet').css('left', this.x+17);
     }

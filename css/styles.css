@@ -38,52 +38,52 @@ body{
   left: 0vw;
   width: 100%;
 }
-#plat1 {
+#plat0 {
   top: 80vh;
   left: calc(100% - 150px);
   width: 150px;
 }
-#plat2 {
+#plat1 {
   top: 80vh;
   left: 0px;
   width: 150px;
 }
-#plat3 {
+#plat2 {
   top: 70vh;
   left: 200px;
   width: 150px;
 }
-#plat4 {
+#plat3 {
   top: 60vh;
   left: 75px;
   width: 100px;
 }
-#plat5 {
+#plat4 {
   top: 50vh;
   left: 200px;
   width: 200px;
 }
-#plat6 {
+#plat5 {
   top: 40vh;
   left: 0px;
   width: 100px;
 }
-#plat7 {
+#plat6 {
   top: 35vh;
   left: calc(100% - 200px);
   width: 200px;
 }
-#plat8 {
+#plat7 {
   top: 25vh;
   left: calc(100% - 50px);
   width: 50px;
 }
-#plat9 {
+#plat8 {
   top: 35vh;
   left: 200px;
   width: 100px;
 }
-#plat10 {
+#plat9 {
   top: 70vh;
   left: 400px;
   width: 100px;

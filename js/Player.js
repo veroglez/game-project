@@ -41,19 +41,19 @@ Player.prototype.move = function(){
 Player.prototype.kill = function(){
   that = this;
   $('.mini').each(function(e) {
-    $topMiniBadGuy = parseInt($(this).css('top'));
-    if (that._collisionTop($(this), that.identity) && that.y <= $topMiniBadGuy ) {
-      $(this).died=true;
-      $(this).remove();
+    $topBadGuy = parseInt($(this).css('top'));
+    if (that._collisionTop($(this), that.identity) && that.y <= $topBadGuy ) {
+      $(this).remove(); console.log('Malo muere!');
       that.sumScore( $(this) );
     }
   });
+  $topBadGuy = parseInt(badGuy.identity.css('top'));
+  if (this._collisionTop(badGuy.identity, this.identity) && this.y <= $topBadGuy ) {
+    badGuy.died=true;
+  }
 };
 
 Player.prototype.sumScore = function( attaked ){
-  if( attaked.hasClass('bird1') ){
-    this.score +=1;
-  }else{
-    this.score +=2;
-  }
+  this.score += attaked.hasClass('plusPoints') ? 2 : 1;
+  console.log('Puntuación: ', this.score);
 };
