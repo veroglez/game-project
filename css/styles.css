@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhaijaan');
+
 body{
   margin:0;
+    font-family: 'Baloo Bhaijaan';
 }
 .container {
   width: 100vw;
@@ -9,20 +12,27 @@ body{
 #scene {
   background: white;
   width: 600px;
-  height: 90vh;
+  height: 95vh;
   margin: auto;
   position: relative;
+  background: url('../img/prison_background.png');
+  background-size: cover;
 }
 #player {
  background-color: red;
  position: absolute;
- width: 15px;
- height: 25px;
+ width: 35px;
+ height: 35px;
+ z-index: 100;
+ background: url('../img/player.png');
+ background-size: cover;
 }
 .platform {
   position: absolute;
-  height: 2px;
+  height: 20px;
   background-color: #600;
+  background: url('../img/platform.png');
+  background-size: contain;
 }
 
 .hide-platform {
@@ -34,7 +44,7 @@ body{
 
 
 #ground {
-  top: 90vh;
+  top: 95vh;
   left: 0vw;
   width: 100%;
 }
@@ -46,12 +56,12 @@ body{
 #plat1 {
   top: 80vh;
   left: 0px;
-  width: 150px;
+  width: 180px;
 }
 #plat2 {
   top: 70vh;
   left: 200px;
-  width: 150px;
+  width: 180px;
 }
 #plat3 {
   top: 60vh;
@@ -59,19 +69,19 @@ body{
   width: 100px;
 }
 #plat4 {
-  top: 50vh;
+  top: 45vh;
   left: 200px;
-  width: 200px;
+  width: 180px;
 }
 #plat5 {
-  top: 40vh;
+  top: 35vh;
   left: 0px;
-  width: 100px;
+  width: 108px;
 }
 #plat6 {
   top: 35vh;
   left: calc(100% - 200px);
-  width: 200px;
+  width: 180px;
 }
 #plat7 {
   top: 25vh;
@@ -91,7 +101,7 @@ body{
 #final-plat {
   top: 15vh;
   left: 0;
-  width: calc(100% - 100px);
+  width: calc(100% - 132px);
 }
 #badGuy {
   position: absolute;
@@ -99,24 +109,83 @@ body{
   left: 30vw;*/
   top: calc(15vh - 50px);
   left: 50px;
-  width: 35px;
-  height: 50px;
+  width: 70px;
+  height: 65px;
   background-color: yellow;
+  background: url('../img/crabby.png');
+  background-size: cover;
+  z-index: 2;
 }
 .mini {
   position: absolute;
   top: calc(80vh - 20px);
   left: 20px;
-  width: 20px;
-  height: 35px;
+  width: 42px;
+  height: 40px;
   background-color: green;
+  background: url('../img/greenie.png');
+  background-size: cover;
+}
+.flying{
+  background: url('../img/jet.png');
+  background-size: cover;
+  width: 40px;
+  height: 45px;
 }
 .bullet {
   position: absolute;
-  width: 5px;
+  width: 15px;
   top: calc(15vh - 50px);
   left: 50px;
   height: 10px;
   border-radius: 10px;
   background: blue;
+  background: url('../img/bullets.png');
+  background-size: cover;
+}
+
+#counter{
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 0;
+  left: calc(100% - 50px);
+  text-align: center;
+  padding: 15px 0;
+  font-size: 1.5rem;
+
+}
+
+#show-counter{
+  width: 400px;
+    height: 450px;
+    background: rgba(0,0,0,0.9);
+    top: calc(50% - 225px);
+    left: calc(50% - 200px);
+    position: absolute;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    font-size: 3rem;
+    z-index: 101;
+}
+#show-counter h4{
+  margin: 30px;
+
+}
+
+.stars{
+  background: url('../img/bronze-star.png');
+  background-size: cover;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+button{
+  padding: 10px 20px;
+    border-radius: 5px;
+    background: white;
+    font-size: 1.2rem;
+    border: 0px;
 }

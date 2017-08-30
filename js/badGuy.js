@@ -59,7 +59,7 @@ BadGuy.prototype.actions = function(){
 
 BadGuy.prototype._shoot = function(){
 
-    if (this._randomNumber(0, 10) <= 1){
+    if (this._randomNumber(0, 10) < 1){
       $('#scene').append('<div class="bullet"></div>');
       $('.bullet').css('left', this.x+17);
     }

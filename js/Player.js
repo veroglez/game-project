@@ -13,7 +13,7 @@ Player.prototype.constructor = Player;
 Player.prototype.jump = function(){
   if (this.onPlatform) {
     this.onPlatform = false;
-    this.speedY = -15;
+    this.speedY = -14;
   }
 };
 
@@ -54,6 +54,6 @@ Player.prototype.kill = function(){
 };
 
 Player.prototype.sumScore = function( attaked ){
-  this.score += attaked.hasClass('plusPoints') ? 2 : 1;
+  this.score += attaked.hasClass('plusPoints') ? 10 : 5;
   console.log('Puntuación: ', this.score);
 };

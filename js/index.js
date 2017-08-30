@@ -10,10 +10,10 @@ var element;
 
 $( document ).ready(function() {
 
-  scene = new Scene( $('#scene'), 10, 6);
+  scene = new Scene( $('#scene'), 10, 7);
   player = new Player( $('#player') );
   badGuy = new BadGuy( $('#badGuy') );
-  army = new Army(6);
+  army = new Army(7);
 
   // platforms = mixPlatforms(platforms);
 
@@ -24,14 +24,17 @@ $( document ).ready(function() {
   });
 
 
-  scene.startGame();
+  scene.startGame($("#ground"), $("#final-plat"));
   platforms = scene.randomPlatforms;
 
   var game = setInterval(function(){
+    scene._counter( $('#counter') );
     if(player.died){
-      alert('You die!');
+      //alert('You die!');
       clearInterval(game);
       scene.resetGame();
+      scene.showFinalScore(count*30);
+
     }
 
     if(badGuy.died){
@@ -43,7 +46,7 @@ $( document ).ready(function() {
     player.move();
     badGuy.actions();
 
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < 7; i++) {
       army.team[i].actions($('#'+platforms[i]));
     }
 
@@ -56,7 +59,7 @@ $( document ).ready(function() {
 
 
   count++;
-  //console.log(count*30 + 'sec');
+  console.log(count*30 + 'sec');
   }, 30);
 
 });

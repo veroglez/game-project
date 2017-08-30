@@ -21,7 +21,7 @@ MiniBadGuy.prototype._move = function( platform ){
   $platformWidth = platform.width();
   $platformLeft = parseInt(platform.css('left'));
 
-  if(this.x >= $platformWidth + $platformLeft - 20){
+  if(this.x >= $platformWidth + $platformLeft - 35){
     this.control = false;
   }else if(this.x <= $platformLeft){
     this.control = true;
