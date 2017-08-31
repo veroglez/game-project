@@ -4,14 +4,13 @@ function Player( identifier ){
   this.onPlatform = true;
   this.speedY = 0;
   this.gravity = 1;
-  this.score = 0;
 }
 Player.prototype = Object.create(Actor.prototype);
 Player.prototype.constructor = Player;
 
 
 Player.prototype.jump = function(){
-  scene.audioJump.play();
+  game.audioJump.play();
   if (this.onPlatform) {
     this.onPlatform = false;
     this.speedY = -15;
@@ -44,17 +43,13 @@ Player.prototype.kill = function(){
   $('.mini').each(function(e) {
     $topBadGuy = parseInt($(this).css('top'));
     if (that._collisionTop($(this), that.identity) && that.y <= $topBadGuy ) {
-      $(this).remove(); console.log('Malo muere!');
-      that.sumScore( $(this) );
+      game.audioHit.play();
+      $(this).remove();
+      game._sumScore( $(this) );
     }
   });
-  $topBadGuy = parseInt(scene.badGuy.identity.css('top'));
-  if (this._collisionTop(scene.badGuy.identity, this.identity) && this.y <= $topBadGuy ) {
-    scene.badGuy.died=true;
+  $topBadGuy = parseInt(game.badGuy.identity.css('top'));
+  if (this._collisionTop(game.badGuy.identity, this.identity) && this.y <= $topBadGuy ) {
+    game.badGuy.died=true;
   }
-};
-
-Player.prototype.sumScore = function( attaked ){
-  this.score += attaked.hasClass('plusPoints') ? 10 : 5;
-  console.log('Puntuación: ', this.score);
 };

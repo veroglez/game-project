@@ -1,14 +1,11 @@
-var scene;
+var game;
 
 var keys = {};
 var count = 0;
-var platforms = [];
 
 $( document ).ready(function() {
 
-  scene = new Scene( $('#scene'), 10, 6);
-
-
+  game = new Game( $('#scene'), 10, 6);
 
   $(document).on('keydown', function(e){
     keys[e.keyCode] = true;
@@ -16,32 +13,31 @@ $( document ).ready(function() {
     delete keys[e.keyCode];
   });
 
-  scene.startGame($("#ground"), $("#final-plat"));
-  platforms = scene.randomPlatforms;
+  game.startGame($("#ground"), $("#final-plat"));
 
-  var game = setInterval(gameInit, 30);
+  var start = setInterval(gameInit, 30);
 
   function gameInit(){
-    scene._counter( $('#counter') );
+    game._counter( $('#counter') );
 
     for (var i = 0; i < 6; i++) {
-      scene.army.team[i].actions($('#'+platforms[i]));
+      game.army.team[i].actions($('#'+game.randomPlatforms[i]));
     }
 
     if(player.died || badGuy.died){
-      clearInterval(game);
-      scene.showFinalScore(count*30);
+      clearInterval(start);
+      game.showFinalScore(count*30);
     }
 
-    scene.player.move();
-    scene.badGuy.actions();
+    game.player.move();
+    game.badGuy.actions();
 
     if(keys[38])
-      scene.player.jump();
+      game.player.jump();
     else if(keys[39])
-      scene.player.moveRight();
+      game.player.moveRight();
     else if(keys[37])
-      scene.player.moveLeft();
+      game.player.moveLeft();
 
     count++;
   }

@@ -19,7 +19,7 @@ BadGuy.prototype._randomNumber = function(min, max){
 };
 
 BadGuy.prototype._killPlayer = function(){
-  if(this._collisionLat( this.identity, scene.player.identity )){
+  if(this._collisionLat( this.identity, game.player.identity )){
     player.died = true;
   }
 };
@@ -51,7 +51,7 @@ BadGuy.prototype.actions = function(){
   if(!player.died)
     this._killPlayer();
   if(this.gunShoot)
-    //this._shoot();
+    this._shoot();
 
   this._move();
 };
@@ -69,7 +69,7 @@ BadGuy.prototype._shoot = function(){
       $posBulletY = parseInt($(this).css('top'));
       $posBulletY += that.speedShot;
       that._update($(this), 'top', $posBulletY);
-      if( $posBulletY >= scene.height )
+      if( $posBulletY >= game.height )
         $(this).remove();
       if (that._collisionTop($(this), $('#player')) )
         player.died = true;

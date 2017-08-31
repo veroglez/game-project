@@ -33,7 +33,7 @@ Actor.prototype.moveLeft = function(){
 
 Actor.prototype.moveRight = function(){
   this.x = this._stateCollection('left');
-  if(this.x <= scene.width - this.width)
+  if(this.x <= game.width - this.width)
     this.x += this.speedX;
   this._update(this.identity, 'left', this.x);
 };

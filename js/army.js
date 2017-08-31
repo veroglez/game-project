@@ -6,16 +6,15 @@ function Army(monkeys) {
 Army.prototype._createArmy = function(number) {
   for (var i = 0; i < number; i++) {
     this.team.push(new MiniBadGuy($('#miniBadGuy' + i)));
-    this.team[i].actions($('#' + scene.randomPlatforms[i]));
+    this.team[i].actions($('#' + game.randomPlatforms[i]));
   }
 };
 
 Army.prototype.initArmy = function(number) {
   for (var i = 0; i < number; i++) {
-    this.team[i].init($("#" + scene.randomPlatforms[i]), 40, $("#" + scene.randomPlatforms[i]).css('left'));
-    if ( scene.randomPlatforms[i]==('plat8') || scene.randomPlatforms[i]==('plat9') ){
+    this.team[i].init($("#" + game.randomPlatforms[i]), 40, $("#" + game.randomPlatforms[i]).css('left'));
+    if ( game.randomPlatforms[i]==('plat8') || game.randomPlatforms[i]==('plat9') ){
       this.team[i].identity.addClass('flying');
-      console.log(this.team[i].identity);
     }
   }
 };

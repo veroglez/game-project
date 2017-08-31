@@ -13,15 +13,15 @@ MiniBadGuy.prototype.constructor = MiniBadGuy;
 MiniBadGuy.prototype.actions = function( platform ){
   if(!player.died)
     this._killPlayer();
-
   this._move( platform );
 };
 
 MiniBadGuy.prototype._move = function( platform ){
   $platformWidth = platform.width();
   $platformLeft = parseInt(platform.css('left'));
+  $miniBudGuyWidth = $('.mini').width();
 
-  if(this.x >= $platformWidth + $platformLeft - 35){
+  if(this.x >= $platformWidth + $platformLeft - $miniBudGuyWidth){
     this.control = false;
   }else if(this.x <= $platformLeft){
     this.control = true;
