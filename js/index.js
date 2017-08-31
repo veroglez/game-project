@@ -1,5 +1,5 @@
 var scene;
-var player;
+
 var badGuy;
 var miniBadGuy;
 var keys = {};
@@ -11,7 +11,6 @@ var element;
 $( document ).ready(function() {
 
   scene = new Scene( $('#scene'), 10, 6);
-  player = new Player( $('#player') );
   badGuy = new BadGuy( $('#badGuy') );
   army = new Army(6);
 
@@ -38,15 +37,15 @@ $( document ).ready(function() {
       scene.showFinalScore(count*30);
     }
 
-    player.move();
+    scene.player.move();
     badGuy.actions();
 
     if(keys[38])
-      player.jump();
+      scene.player.jump();
     else if(keys[39])
-      player.moveRight();
+      scene.player.moveRight();
     else if(keys[37])
-      player.moveLeft();
+      scene.player.moveLeft();
 
     count++;
   }

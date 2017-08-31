@@ -10,10 +10,11 @@ function Scene( identifier, numPlatforms, numEnemies, ground, finalPlat ) {
   this.time = 0;
   this.audioJump = new Audio('audio/jump_01.wav');
   // this.audioJump.play();
+  this.player = new Player( $('#player') );
 }
 
 Scene.prototype.startGame = function(ground, finalPlat){
-  player.init( ground, 25, 20 );
+  this.player.init( ground, 25, 20 );
   badGuy.init( finalPlat, 65, 50 );
   army.initArmy( this.numEnemies );
 };
@@ -62,7 +63,7 @@ Scene.prototype._initScene = function(){
 };
 
 Scene.prototype._counter = function( counter ){
-  counter.text(player.score);
+  counter.text(this.player.score);
 };
 
 Scene.prototype.showFinalScore = function( counter ){

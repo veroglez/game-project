@@ -19,7 +19,7 @@ BadGuy.prototype._randomNumber = function(min, max){
 };
 
 BadGuy.prototype._killPlayer = function(){
-  if(this._collisionLat( this.identity, player.identity )){
+  if(this._collisionLat( this.identity, scene.player.identity )){
     player.died = true;
   }
 };
