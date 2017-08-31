@@ -9,14 +9,15 @@ function Scene( identifier, numPlatforms, numEnemies, ground, finalPlat ) {
   this._initScene();
   this.time = 0;
   this.audioJump = new Audio('audio/jump_01.wav');
-  // this.audioJump.play();
-  this.player = new Player( $('#player') );
 }
 
 Scene.prototype.startGame = function(ground, finalPlat){
+  this.player = new Player( $('#player') );
+  this.badGuy = new BadGuy( $('#badGuy') );
+  this.army = new Army(6);
   this.player.init( ground, 25, 20 );
-  badGuy.init( finalPlat, 65, 50 );
-  army.initArmy( this.numEnemies );
+  this.badGuy.init( finalPlat, 65, 50 );
+  this.army.initArmy( this.numEnemies );
 };
 
 Scene.prototype._createPlatforms = function(){
@@ -82,7 +83,7 @@ Scene.prototype._convertSecondsToMinutes = function( millis ){
 };
 
 Scene.prototype.getStars = function( counter ){
-  if(badGuy.died){
+  if(this.badGuy.died){
     if( player.score > 20 && counter < 20000){
       $('.stars').css('background-image', 'url("../game-project/img/gold-star.png")');
     }else if( player.score > 10 && counter < 20000){

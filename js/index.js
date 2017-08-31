@@ -1,18 +1,14 @@
 var scene;
 
-var badGuy;
-var miniBadGuy;
 var keys = {};
 var count = 0;
 var platforms = [];
-var element;
-
 
 $( document ).ready(function() {
 
   scene = new Scene( $('#scene'), 10, 6);
-  badGuy = new BadGuy( $('#badGuy') );
-  army = new Army(6);
+
+
 
   $(document).on('keydown', function(e){
     keys[e.keyCode] = true;
@@ -29,7 +25,7 @@ $( document ).ready(function() {
     scene._counter( $('#counter') );
 
     for (var i = 0; i < 6; i++) {
-      army.team[i].actions($('#'+platforms[i]));
+      scene.army.team[i].actions($('#'+platforms[i]));
     }
 
     if(player.died || badGuy.died){
@@ -38,7 +34,7 @@ $( document ).ready(function() {
     }
 
     scene.player.move();
-    badGuy.actions();
+    scene.badGuy.actions();
 
     if(keys[38])
       scene.player.jump();

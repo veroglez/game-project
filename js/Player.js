@@ -48,9 +48,9 @@ Player.prototype.kill = function(){
       that.sumScore( $(this) );
     }
   });
-  $topBadGuy = parseInt(badGuy.identity.css('top'));
-  if (this._collisionTop(badGuy.identity, this.identity) && this.y <= $topBadGuy ) {
-    badGuy.died=true;
+  $topBadGuy = parseInt(scene.badGuy.identity.css('top'));
+  if (this._collisionTop(scene.badGuy.identity, this.identity) && this.y <= $topBadGuy ) {
+    scene.badGuy.died=true;
   }
 };
 
