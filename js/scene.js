@@ -7,21 +7,15 @@ function Scene( identifier, numPlatforms, numEnemies, ground, finalPlat ) {
   this.identity = identifier;
   this.randomPlatforms = [];
   this._initScene();
+  this.time = 0;
+  this.audioJump = new Audio('audio/jump_01.wav');
+  // this.audioJump.play();
 }
 
 Scene.prototype.startGame = function(ground, finalPlat){
   player.init( ground, 25, 20 );
   badGuy.init( finalPlat, 65, 50 );
-  army.initArmy(7, platforms);
-
-};
-
-Scene.prototype.resetGame = function(){
-  player.speedY = 0; player.onPlatform = false; player.died = false;
-  badGuy.died = false;
-  for (var i = 0; i < this.numEnemies; i++) {
-    army.team[i].died = false;
-  }
+  army.initArmy( this.numEnemies );
 };
 
 Scene.prototype._createPlatforms = function(){
@@ -73,13 +67,27 @@ Scene.prototype._counter = function( counter ){
 
 Scene.prototype.showFinalScore = function( counter ){
   this._createElementsScene(1, 'show-counter');
-  counter = this._convertSecondsToMinutes(counter);
-  $('#show-counter').append('<h4>'+ counter +'<br>Score: '+ player.score+'</h4>');
-  $('#show-counter').append('<div class="stars">').append('<button>Reset');
+  this.time = this._convertSecondsToMinutes( counter );
+  $('#show-counter').append('<h4>'+ this.time +'<br>Score: '+ player.score+'</h4>');
+  $('#show-counter').append('<div class="stars">').append('<a href="index.html"><button id="reset">Reset');
+  this.getStars( counter );
+
 };
 
 Scene.prototype._convertSecondsToMinutes = function( millis ){
   var minutes = Math.floor(millis / 60000);
   var seconds = ((millis % 60000) / 1000).toFixed(0);
   return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+};
+
+Scene.prototype.getStars = function( counter ){
+  if(badGuy.died){
+    if( player.score > 20 && counter < 20000){
+      $('.stars').css('background-image', 'url("../game-project/img/gold-star.png")');
+    }else if( player.score > 10 && counter < 20000){
+      $('.stars').css('background-image', 'url("../game-project/img/silver-star.png")');
+    }else{
+      $('.stars').css('background-image', 'url("../game-project/img/bronze-star.png")');
+    }
+  }
 };

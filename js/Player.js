@@ -11,9 +11,10 @@ Player.prototype.constructor = Player;
 
 
 Player.prototype.jump = function(){
+  scene.audioJump.play();
   if (this.onPlatform) {
     this.onPlatform = false;
-    this.speedY = -14;
+    this.speedY = -15;
   }
 };
 

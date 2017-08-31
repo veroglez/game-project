@@ -2,7 +2,7 @@
 
 body{
   margin:0;
-    font-family: 'Baloo Bhaijaan';
+  font-family: 'Baloo Bhaijaan';
 }
 .container {
   width: 100vw;
@@ -175,7 +175,6 @@ body{
 }
 
 .stars{
-  background: url('../img/bronze-star.png');
   background-size: cover;
   width: 100px;
   height: 100px;
@@ -183,9 +182,14 @@ body{
   margin-bottom: 20px;
 }
 button{
-  padding: 10px 20px;
-    border-radius: 5px;
+  padding: 10px 30px;
+    border-radius: 10px;
     background: white;
     font-size: 1.2rem;
     border: 0px;
+    background: #39A0ED;
+    font-family: 'Baloo Bhaijaan';
+    color: white;
+    text-transform: uppercase;
+
 }

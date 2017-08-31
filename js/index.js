@@ -10,12 +10,10 @@ var element;
 
 $( document ).ready(function() {
 
-  scene = new Scene( $('#scene'), 10, 7);
+  scene = new Scene( $('#scene'), 10, 6);
   player = new Player( $('#player') );
   badGuy = new BadGuy( $('#badGuy') );
-  army = new Army(7);
-
-  // platforms = mixPlatforms(platforms);
+  army = new Army(6);
 
   $(document).on('keydown', function(e){
     keys[e.keyCode] = true;
@@ -23,32 +21,25 @@ $( document ).ready(function() {
     delete keys[e.keyCode];
   });
 
-
   scene.startGame($("#ground"), $("#final-plat"));
   platforms = scene.randomPlatforms;
 
-  var game = setInterval(function(){
-    scene._counter( $('#counter') );
-    if(player.died){
-      //alert('You die!');
-      clearInterval(game);
-      scene.resetGame();
-      scene.showFinalScore(count*30);
+  var game = setInterval(gameInit, 30);
 
+  function gameInit(){
+    scene._counter( $('#counter') );
+
+    for (var i = 0; i < 6; i++) {
+      army.team[i].actions($('#'+platforms[i]));
     }
 
-    if(badGuy.died){
-      alert('you win!');
-      scene.resetGame();
+    if(player.died || badGuy.died){
       clearInterval(game);
+      scene.showFinalScore(count*30);
     }
 
     player.move();
     badGuy.actions();
-
-    for (var i = 0; i < 7; i++) {
-      army.team[i].actions($('#'+platforms[i]));
-    }
 
     if(keys[38])
       player.jump();
@@ -57,9 +48,7 @@ $( document ).ready(function() {
     else if(keys[37])
       player.moveLeft();
 
-
-  count++;
-  console.log(count*30 + 'sec');
-  }, 30);
+    count++;
+  }
 
 });
