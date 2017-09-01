@@ -105,10 +105,10 @@ body{
   position: absolute;
   /*top: calc(120px - 50px);*/
   left: 50px;
-  width: 70px;
-  height: 65px;
+  width: 60px;
+  height: 80px;
   background-color: yellow;
-  background: url('../img/crabby.png');
+  background: url('../img/pigeon.png');
   background-size: cover;
   z-index: 2;
 }

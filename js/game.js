@@ -19,7 +19,7 @@ Game.prototype.startGame = function(elemGround, elemFinalPlat, elemPlayer, elemB
   this.badGuy = new BadGuy( elemBadGuy );
   this.army = new Army( this.numEnemies );
   this.player.init( elemGround, 25, 20 );
-  this.badGuy.init( elemFinalPlat, 65, 50 );
+  this.badGuy.init( elemFinalPlat, 79, 50 );
   this.army.initArmy( this.numEnemies );
   this.audioSong.play();
   this.start = setInterval(this.gameInit.bind(this), 30);
