@@ -1,4 +1,4 @@
-function Game( identifier, numPlatforms, numEnemies, ground, finalPlat ) {
+function Game( identifier, numPlatforms, numEnemies ) {
   this.width = parseInt( identifier.width() );
   this.height = parseInt( identifier.height() );
   this.platforms = [];
@@ -11,16 +11,43 @@ function Game( identifier, numPlatforms, numEnemies, ground, finalPlat ) {
   this.audioHit = new Audio('audio/hit.ogg');
   this.audioSong = new Audio('audio/alien_swamp.ogg');
   this.score = 0;
+  this.count = 0;
 }
 
-Game.prototype.startGame = function(ground, finalPlat){
-  this.player = new Player( $('#player') );
-  this.badGuy = new BadGuy( $('#badGuy') );
-  this.army = new Army(6);
-  this.player.init( ground, 25, 20 );
-  this.badGuy.init( finalPlat, 65, 50 );
+Game.prototype.startGame = function(elemGround, elemFinalPlat, elemPlayer, elemBadGuy){
+  this.player = new Player( elemPlayer );
+  this.badGuy = new BadGuy( elemBadGuy );
+  this.army = new Army( this.numEnemies );
+  this.player.init( elemGround, 25, 20 );
+  this.badGuy.init( elemFinalPlat, 65, 50 );
   this.army.initArmy( this.numEnemies );
-  game.audioSong.play();
+  this.audioSong.play();
+  this.start = setInterval(this.gameInit.bind(this), 30);
+};
+
+Game.prototype.gameInit = function(){
+  if(keys[38])
+    this.player.jump();
+  else if(keys[39])
+    this.player.moveRight();
+  else if(keys[37])
+    this.player.moveLeft();
+
+  this._counter( $('#counter') );
+
+  for (var i = 0; i < 6; i++) {
+    this.army.team[i].actions($('#'+this.randomPlatforms[i]));
+  }
+
+  this.player.move();
+  this.badGuy.actions();
+
+  if(this.player.died || this.badGuy.died){
+    clearInterval(this.start);
+    this.showFinalScore(this.count*30);
+  }
+
+  this.count++;
 };
 
 Game.prototype._createPlatforms = function(){

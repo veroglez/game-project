@@ -11,7 +11,7 @@ MiniBadGuy.prototype.constructor = MiniBadGuy;
 
 
 MiniBadGuy.prototype.actions = function( platform ){
-  if(!player.died)
+  if(!game.player.died)
     this._killPlayer();
   this._move( platform );
 };

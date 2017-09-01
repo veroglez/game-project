@@ -20,7 +20,7 @@ BadGuy.prototype._randomNumber = function(min, max){
 
 BadGuy.prototype._killPlayer = function(){
   if(this._collisionLat( this.identity, game.player.identity )){
-    player.died = true;
+    game.player.died = true;
   }
 };
 
@@ -48,7 +48,7 @@ BadGuy.prototype._moveLimits = function(){
 };
 
 BadGuy.prototype.actions = function(){
-  if(!player.died)
+  if(!game.player.died)
     this._killPlayer();
   if(this.gunShoot)
     this._shoot();
@@ -72,7 +72,7 @@ BadGuy.prototype._shoot = function(){
       if( $posBulletY >= game.height )
         $(this).remove();
       if (that._collisionTop($(this), $('#player')) )
-        player.died = true;
+        game.player.died = true;
 
     });
 };
