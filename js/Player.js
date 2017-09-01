@@ -8,7 +8,7 @@ function Player( identifier ){
 Player.prototype = Object.create(Actor.prototype);
 Player.prototype.constructor = Player;
 
-
+ 
 Player.prototype.jump = function(){
   game.audioJump.play();
   if (this.onPlatform) {
